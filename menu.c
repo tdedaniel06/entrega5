@@ -8,15 +8,14 @@ void listarMenu(){
 
     printf("---------- Vamos todos ficar bem! ----------");
     printf("\n");
-    printf("Escreva o numero da opção desejada ou 0 para sair");
+    printf("Escreva o numero da opcao desejada ou 0 para sair");
     printf("\n");
+    printf("\n1 - Clinicas");
+    printf("\n2 - Funcionarios");
+    printf("\n3 - Marcar Consulta");
+    printf("\n4 - Consultar dados");
     printf("\n");
-    printf("1 - Clinicas");
-    printf("2 - Funcionarios");
-    printf("3 - Marcar Consulta");
-    printf("4 - Consultar dados");
-    printf("\n");
-    printf("Selecionar: ");
+    printf("\nSelecionar: ");
     scanf("%d", &escolha);
 
     consultarMenu(escolha);
@@ -42,7 +41,7 @@ void consultarMenu(int escolha){
         break;
     
     default:
-        printf("A sua seleção não é valida, volta a escolher!");
+        printf("A sua selecao nao e valida, volta a escolher!\n");
         listarMenu();
         break;
     }
