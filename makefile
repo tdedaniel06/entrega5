@@ -1,13 +1,16 @@
 all:prog
 
-prog: main.o menu.o
-    gcc -g -o prog main.o menu.o
+prog: main.o menu.o funcionario.o
+    gcc -g -o prog main.o menu.o funcionario.o
 
 main.o: main.c menu.h
     gcc -g -o main.o main.c -c 
 
-menu.o: menu.c 
-    gcc-g -o menu.o menu.c -c 
+menu.o: menu.c funcionario.h
+    gcc -g -o menu.o menu.c -c 
+
+funcionario.o: funcionario.c 
+    gcc -g -o funcionario.o funcionario.c -c 
 
 clean:
     rm -rf *o *~prog
