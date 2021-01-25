@@ -30,7 +30,7 @@ void consultarMenu(int escolha){
         break;
     case 2:
         printf("2");
-        system("cls");
+        //system("cls");
         menuFuncionario();
         break;
     case 3:

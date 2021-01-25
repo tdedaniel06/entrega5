@@ -25,11 +25,13 @@ void menuFuncionario();
 
 void consultarMenuFuncionario(int escolha);
 
-//listar funcionario
-
 //criar funcionario
-void criarFuncionario();
+void criarFuncionario(Funcionario *funcionarios);
 
+//listar funcionario
+void listarFuncionario(Funcionario *funcionarios);
 
+//eliminar funcionario
+void eliminarFuncionario(Funcionario *funcionarios);
 
 #endif
