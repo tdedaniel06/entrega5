@@ -3,6 +3,7 @@
 #include <string.h>
 #include "funcionario.h"
 
+
 //variavel para o id do funcionario
 int idBase = 0;
 Funcionario funcionarios[50];

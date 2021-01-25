@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "menu.h"
 #include "funcionario.c"
+#include "clinica.c"
 
 //listar menu
 void listarMenu(){
@@ -27,6 +28,7 @@ void consultarMenu(int escolha){
     {
     case 1:
         printf("1");
+        menuClinica();
         break;
     case 2:
         printf("2");
