@@ -1,17 +1,17 @@
 #ifndef CLINICA_H_
 #define CLINICA_H_
 
-/*Enumerables
+/*Enumerables*/
 typedef enum{
     false,
     true
-}boolean;*/
+}boolean;
 
 /*Structures*/
 typedef struct 
 {
     int id;
-    char nome[50];
+    char nome;
     boolean active;
 }Clinica;
 
@@ -25,6 +25,6 @@ void criarClinica(Clinica *clinicas);
 
 void listarClinica(Clinica *clinicas);
 
-void eliminarClinica(Clinica *clinicas);
+void eliminarClinica(Clinica *clinicas)
 
 #endif
