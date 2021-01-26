@@ -29,7 +29,7 @@ void consultarMenuClinica(int escolha){
     switch (escolha)
     {
     case 0:
-        //listarMenu();
+        listarMenu();
         break;
     case 1:
         printf("Criar uma nova Clinica:");
@@ -55,7 +55,7 @@ void consultarMenuClinica(int escolha){
 //criar funcionario (request dados)
 void criarClinica(Clinica *clinicas){
     Clinica clinica;
-    puts("\n");
+    puts("");
     
     //como fazer sem utilizar o fflsuh
     fflush(stdin);
@@ -89,7 +89,7 @@ void listarClinica(Clinica *clinicas){
         if (clinicas[i].active)
         {
             printf("%d  ", clinicas[i].id);
-            printf("  %s  ", clinicas[i].nome);
+            printf("  %s  \n", clinicas[i].nome);
         }
     }
 

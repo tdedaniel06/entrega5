@@ -1,7 +1,7 @@
 #ifndef FUNCIONARIO_H_
 #define FUNCIONARIO_H_
 
-/*Enumerables */
+//struct bool
 typedef enum{
     false,
     true

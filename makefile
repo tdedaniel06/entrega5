@@ -6,7 +6,7 @@ prog: main.o menu.o funcionario.o
 main.o: main.c menu.h
     gcc -g -o main.o main.c -c 
 
-menu.o: menu.c funcionario.h clinica.h
+menu.o: menu.c consulta.h clinica.h funcionario.h
     gcc -g -o menu.o menu.c -c 
 
 funcionario.o: funcionario.c 
@@ -14,6 +14,9 @@ funcionario.o: funcionario.c
 
 clinica.o: clinica.c 
     gcc -g -o clinica.o clinica.c -c 
+
+consulta.o: consulta.c 
+    gcc -g -o consulta.o consulta.c -c 
 
 
 clean:

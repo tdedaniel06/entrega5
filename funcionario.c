@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "funcionario.h"
+#include "utils.c"
 
 
 //variavel para o id do funcionario
@@ -33,17 +34,21 @@ void consultarMenuFuncionario(int escolha){
         listarMenu();
         break;
     case 1:
+        cleanScreen();
         printf("Criar um novo funcionario:");
         criarFuncionario(funcionarios);
         break;
     case 2:
-        printf("Listar funcionarios: \n");
+        cleanScreen();
+        printf("-------Listar Funcionarios -------\n");
         listarFuncionario(funcionarios);
         break; 
     case 3:
+        cleanScreen();
         printf("Editar func");
         break;   
     case 4:
+        cleanScreen();
         printf("Eliminar funcionario \n");
         eliminarFuncionario(funcionarios);
         break;   
@@ -56,7 +61,7 @@ void consultarMenuFuncionario(int escolha){
 //criar funcionario (request dados)
 void criarFuncionario(Funcionario *funcionarios){
     Funcionario funcionario;
-    puts("\n");
+    puts("");
     
     //como fazer sem utilizar o fflsuh
     fflush(stdin);
@@ -76,7 +81,7 @@ void criarFuncionario(Funcionario *funcionarios){
     scanf("%d", &funcionario.idade);
 
     printf("Vencimento: ");
-    scanf("%d", &funcionario.vencimento);
+    scanf("%f", &funcionario.vencimento);
     //como fazer sem utilizar o fflsuh
     fflush(stdin);
 
@@ -91,6 +96,7 @@ void criarFuncionario(Funcionario *funcionarios){
     //incrementa ao idBase para o proximo funcionario
     idBase++;
 
+    cleanScreen();
     //voltar ao menu funcionario
     menuFuncionario();
 }
@@ -106,12 +112,13 @@ void listarFuncionario(Funcionario *funcionarios){
             printf("  %s  ", funcionarios[i].nome);
             printf("  %c  ", funcionarios[i].genero);
             printf("  %d  ", funcionarios[i].idade);
-            printf("  %d  ", funcionarios[i].vencimento);
+            printf("  %.2f  ", funcionarios[i].vencimento);
             printf("  %c  ", funcionarios[i].tipo);
-            printf("  %c  \n", funcionarios[i].active);
+            printf("  %c\n", funcionarios[i].active);
         }
     }
 
+    cleanScreen();
     //voltar ao menu funcionario
     menuFuncionario();
 }
@@ -130,6 +137,7 @@ void eliminarFuncionario(Funcionario *funcionarios){
         funcionarios[idEliminar].active = false;
     }
 
+    cleanScreen();
     //voltar ao menu funcionario
     menuFuncionario();
 }
