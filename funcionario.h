@@ -1,7 +1,6 @@
 #ifndef FUNCIONARIO_H_
 #define FUNCIONARIO_H_
 
-
 /* structures */
 typedef struct
 {
@@ -11,7 +10,7 @@ typedef struct
     int idade;
     float vencimento;
     char tipo;
-    char clinica;
+    int clinica;
     boolean active;
 }Funcionario;
 
@@ -30,4 +29,6 @@ void listarFuncionario(Funcionario *funcionarios);
 //eliminar funcionario
 void eliminarFuncionario(Funcionario *funcionarios);
 
+//verificar existencia de clinica
+int verificarClinica(int id);
 #endif

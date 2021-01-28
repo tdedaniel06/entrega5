@@ -39,7 +39,10 @@ void consultarMenuResuntados(int escolha){
         somaVencimentos();
         break; 
     case 3:
-        printf("Editar func");
+        printf("Marcacoes dos funcionarios de uma clinica: \n");
+        printf("Qual clinica deseja pesquisar: ");
+        scanf("%d", &idClinica);
+        marcacoesPorEnfermeiro(idClinica);
         break;   
     case 4:
         printf("Eliminar funcionario \n");
@@ -164,4 +167,28 @@ void listarMedicosVencimento(){
         }
     }
     printf("Total de Vencimentos de Medicos: %d", somaVencMedicos);
+}
+
+//marcacoes por enfermeiro de uma clinica
+void marcacoesPorEnfermeiro(int idClinica){
+    int nMarcacoes = 0;
+
+    for (int i = 0; i < idBaseC; i++)
+    {
+        for (int j = 0; j < idBase; j++)
+        {
+            printf("Clinica: %d  -  %s", clinicas[i].id, clinicas[i].nome); // info da clinica
+            if (funcionarios[j].clinica == i && funcionarios[j].tipo == 'E')
+            {
+                for (int k = 0; k < idBaseU; k++)
+                {
+                    if(consultas[k].idFuncionario == j){
+                        nMarcacoes++;
+                    }
+                }
+                printf("  Enfermeiro: %d  -  %s, tem %d marcacoes.", funcionarios[j].id, funcionarios[j].nome, nMarcacoes);
+                nMarcacoes = 0;
+            }
+        }
+    }    
 }

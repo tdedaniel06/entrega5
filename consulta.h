@@ -35,5 +35,10 @@ void listarConsultas(Consulta *consultas);
 //eliminar consulta
 void eliminarConsulta(Consulta *consultas);
 
+//verifica funcionario id
+int verificaFuncionario(int id);
+
+//verifica disponibilidade do funcionario
+int verificaAgendaFuncionario(int id, Data data);
 
 #endif

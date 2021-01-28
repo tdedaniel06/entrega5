@@ -11,4 +11,6 @@ int somaVencimentos();
 
 void listarMedicosVencimento();
 
+void marcacoesPorEnfermeiro(int idClinica);
+
 #endif

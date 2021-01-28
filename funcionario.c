@@ -2,12 +2,14 @@
 #include <stdlib.h>
 #include <string.h>
 #include "funcionario.h"
+#include "clinica.h"
 #include "utils.c"
 
 
 //variavel para o id do funcionario
-int idBase = 0;
+int idBase = 0, verificarC;
 Funcionario funcionarios[50];
+Clinica clinicas[50];
 
 //menu funcionario detailed
 void menuFuncionario(){
@@ -34,26 +36,41 @@ void consultarMenuFuncionario(int escolha){
         listarMenu();
         break;
     case 1:
-        cleanScreen();
-        printf("Criar um novo funcionario:");
-        criarFuncionario(funcionarios);
+        //cleanScreen();
+        //verifica se existem clinicas -> pelo idBaseC
+        if(idBaseC == 0){
+            printf("Para criar um funcionario deve ter pelo menos uma clinica.\n");
+            menuFuncionario();
+        }
+        else{
+            printf("Criar um novo funcionario:");
+            criarFuncionario(funcionarios);
+        }
         break;
     case 2:
-        cleanScreen();
+        //cleanScreen();
         printf("-------Listar Funcionarios -------\n");
         listarFuncionario(funcionarios);
         break; 
     case 3:
-        cleanScreen();
+        //cleanScreen();
         printf("Editar func");
         break;   
     case 4:
-        cleanScreen();
-        printf("Eliminar funcionario \n");
-        eliminarFuncionario(funcionarios);
+        //cleanScreen();
+        if(idBase == 0){
+            printf("Nao existem funcionarios!\n");
+            menuFuncionario();
+        }
+        else{
+            printf("Eliminar funcionario \n");
+            eliminarFuncionario(funcionarios);
+        }
         break;   
     
     default:
+        printf("Opacao inexistente!");
+        menuFuncionario();
         break;
     }
 }
@@ -76,6 +93,13 @@ void criarFuncionario(Funcionario *funcionarios){
 
     printf("Genero (M/F): ");
     scanf("%c", &funcionario.genero);
+    
+    //verifica genero d funcionario inserido
+    while(funcionario.genero != 'M' || funcionario.genero != 'F'){
+        printf("Formato incorreto!");
+        printf("Genero (M/F): ");
+        scanf("%c", &funcionario.genero);
+    }
 
     printf("Idade: ");
     scanf("%d", &funcionario.idade);
@@ -87,6 +111,29 @@ void criarFuncionario(Funcionario *funcionarios){
 
     printf("Cargo (M - medico / E - enfermeiro / A - auxiliar): ");
     scanf("%c", &funcionario.tipo);
+    
+    //verifica tipo de funcionario inserido
+    while(funcionario.tipo != 'M' || funcionario.tipo != 'E' || funcionario.tipo != 'A'){
+        printf("Formato incorreto!");
+        printf("Cargo (M - medico / E - enfermeiro / A - auxiliar): ");
+        scanf("%c", &funcionario.tipo);
+    }
+
+    printf("Clinica: ");
+    scanf("%d", &funcionario.clinica);
+
+    //verifica se funcionario existe
+    verificarC = verificarClinica(funcionario.clinica);
+    //ciclo pedir clinica existente
+    while (verificarC < 0)
+    { 
+        printf("Clinica nao encontrada!\n");
+        printf("Clinica: ");
+        scanf("%d", &funcionario.clinica);
+
+        //verifica se funcionario existe
+        verificarC = verificarClinica(funcionario.clinica);
+    }
 
     funcionario.active = true;
 
@@ -96,29 +143,29 @@ void criarFuncionario(Funcionario *funcionarios){
     //incrementa ao idBase para o proximo funcionario
     idBase++;
 
-    cleanScreen();
+    //cleanScreen();
     //voltar ao menu funcionario
     menuFuncionario();
 }
 
 //listar funcionarios
 void listarFuncionario(Funcionario *funcionarios){
-    printf("ID  |  NOME  |  GENERO  |  IDADE  |  VENCIMENTO  |  TIPO \n");
+    printf("ID  |  NOME  |  GENERO  |  IDADE  |  VENCIMENTO  |  TIPO  |  CLINICA \n");
     for (int i = 0; i < idBase; i++)
     {
         if (funcionarios[i].active)
         {
             printf("%d  ", funcionarios[i].id);
             printf("  %s  ", funcionarios[i].nome);
-            printf("  %c  ", funcionarios[i].genero);
-            printf("  %d  ", funcionarios[i].idade);
-            printf("  %.2f  ", funcionarios[i].vencimento);
-            printf("  %c  ", funcionarios[i].tipo);
-            printf("  %c\n", funcionarios[i].active);
+            printf("     %c      ", funcionarios[i].genero);
+            printf("   %d     ", funcionarios[i].idade);
+            printf("   %.2f    ", funcionarios[i].vencimento);
+            printf("    %c    ", funcionarios[i].tipo);
+            printf("     %d\n", funcionarios[i].clinica);
         }
     }
 
-    cleanScreen();
+    //cleanScreen();
     //voltar ao menu funcionario
     menuFuncionario();
 }
@@ -137,9 +184,29 @@ void eliminarFuncionario(Funcionario *funcionarios){
         funcionarios[idEliminar].active = false;
     }
 
-    cleanScreen();
+    //cleanScreen();
     //voltar ao menu funcionario
     menuFuncionario();
 }
 
+//verificar existencia de clinica
+int verificarClinica(int id){
+    int verifica = -1;
+
+    //percorre as clinicas (idBaseC e o id das clinicas, ou seja, a sua posicao no array)
+    for (int i = 0; i < idBaseC; i++)
+    {
+        //verificar que apenas clinicas
+        if (clinicas[i].active)
+        {
+            //verifica se o id enviado tem correspondencia
+            if (id == i)
+            {
+                verifica = i;
+            }
+        }
+    }
+
+    return verifica;
+}
 

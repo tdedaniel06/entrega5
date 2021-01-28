@@ -3,20 +3,19 @@
 #include <string.h>
 #include "consulta.h"
 
-
-int idBaseU = 0;
+int idBaseU = 0, verificarF, verificarA;
 Consulta consultas[50];
 
 //menu marcar consulta detailed
-void menuConsulta(){
+void menuConsulta()
+{
     int escolha;
 
     printf("---------- Marcar Consulta ----------");
     printf("\n");
     printf("\n1 - Marcar consulta");
     printf("\n2 - Listar consultas");
-    printf("\n3 - Editar funcionario");
-    printf("\n4 - Desmarcar consulta");
+    printf("\n3 - Desmarcar consulta");
     printf("\n0 - Voltar");
     printf("\n");
     printf("\nSelecionar: ");
@@ -25,34 +24,47 @@ void menuConsulta(){
     consultarMenuConsulta(escolha);
 }
 
-void consultarMenuConsulta(int escolha){
+void consultarMenuConsulta(int escolha)
+{
     switch (escolha)
     {
     case 0:
         listarMenu();
         break;
     case 1:
-        printf("Criar uma marcacao:");
-        criarConsulta(consultas);
+    if (idBase == 0)
+        {
+            printf("Nao existem funcionarios!");
+            menuConsulta();
+        }
+        else{
+            printf("Criar uma marcacao:");
+            criarConsulta(consultas);
+        }
         break;
     case 2:
-        printf("Listar funcionarios: \n");
+        printf("Listar Marcacoes: \n");
         listarConsultas(consultas);
-        break; 
+        break;
     case 3:
-        printf("Editar funcionarios");
-        break;   
-    case 4:
-        printf("Eliminar funcionario \n");
-        eliminarConsulta(consultas);
-        break;   
-    
+        if (idBaseU == 0)
+        {
+            printf("Nao existem consultas agendadas!");
+            menuConsulta();
+        }
+        else{
+            printf("Eliminar Consulta \n");
+            eliminarConsulta(consultas);
+        }
+        break;
+
     default:
         break;
     }
 }
 
-void criarConsulta(Consulta *consultas){
+void criarConsulta(Consulta *consultas)
+{
     Consulta consulta;
     puts("");
 
@@ -72,12 +84,31 @@ void criarConsulta(Consulta *consultas){
     scanf("%d", &consulta.idFuncionario);
 
     //verifica se funcionario existe
+    verificarF = verificaFuncionario(consulta.idFuncionario);
+    while (verificarF < 0)
+    {
+        printf("Funcionario nao encontrado!\n");
+        printf("Funcionario: ");
+        scanf("%d", &consulta.idFuncionario);
 
+        //verifica se funcionario existe
+        verificarF = verificaFuncionario(consulta.idFuncionario);
+    }
 
     printf("Data Consulta (d/m/a): ");
     scanf("%d/%d/%d", &consulta.dataConsulta.dia, &consulta.dataConsulta.mes, &consulta.dataConsulta.ano);
-    
+
     //verifica se a data está disponivel para aquele funcionario
+    verificarA = verificaAgendaFuncionario(consulta.idFuncionario, consulta.dataConsulta);
+    while (verificarA == 0)
+    {
+        printf("Funcionario com agenda cheia, escolha outra data!\n");
+        printf("Data Consulta (d/m/a): ");
+        scanf("%d/%d/%d", &consulta.dataConsulta.dia, &consulta.dataConsulta.mes, &consulta.dataConsulta.ano);
+
+        //verifica se funcionario existe
+        verificarA = verificaAgendaFuncionario(consulta.idFuncionario, consulta.dataConsulta);
+    }
 
     consulta.active = true;
 
@@ -92,7 +123,8 @@ void criarConsulta(Consulta *consultas){
 }
 
 //listar consultas
-void listarConsultas(Consulta *consultas){
+void listarConsultas(Consulta *consultas)
+{
     printf("ID  |  NOME  |  SNS  |   DATA   |  FUNCIONARIO \n");
     for (int i = 0; i < idBaseU; i++)
     {
@@ -110,7 +142,8 @@ void listarConsultas(Consulta *consultas){
 }
 
 //eliminar consultas
-void eliminarConsulta(Consulta *consultas){
+void eliminarConsulta(Consulta *consultas)
+{
     int idEliminar;
     printf("Qual o id da consulta a eliminar: ");
     scanf("%d", &idEliminar);
@@ -119,11 +152,62 @@ void eliminarConsulta(Consulta *consultas){
     {
         printf("Utilizador não encontrado!");
     }
-    else{
+    else
+    {
         //modificar o funcionario.active para false(fica desativado)
         consultas[idEliminar].active = false;
     }
 
     //volta ao menu consultas
     menuConsulta();
+}
+
+//verifica existencia do funcionario selecionado
+int verificaFuncionario(int id)
+{
+    int verifica = -1;
+
+    //percorre os funcionarios (idBase e o id dos func, ou seja, a sua posicao no array)
+    for (int i = 0; i < idBase; i++)
+    {
+        //verificar que apenas medicos e enfermeiros possam atender a consultas e se estao ativos
+        if (funcionarios[i].tipo == 'M' || funcionarios[i].tipo == 'E' && funcionarios[i].active)
+        {
+            //verifica se o id enviado tem correspondencia
+            if (id == i)
+            {
+                verifica = i;
+            }
+        }
+    }
+
+    return verifica;
+}
+
+int verificaAgendaFuncionario(int id, Data data){
+    int nConsultas = 0;
+
+    //percorre todas as consultas
+    for (int i = 0; i < idBaseU; i++)
+    {        
+        //procurar o funcionario correspondente
+        if (consultas[i].idFuncionario == id)
+        {
+            //verificar se as datas sao iguais
+            if (consultas->dataConsulta.dia == data.dia && consultas->dataConsulta.mes == data.mes && consultas->dataConsulta.ano == data.ano)
+            {
+                nConsultas++; //se forem, increment
+            }
+        }
+    }
+
+    //apenas duas consultas por dia
+    if (nConsultas >= 2)
+    {
+        return 0;
+    }
+    else
+    {
+        return 1;
+    }   
 }

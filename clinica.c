@@ -43,8 +43,15 @@ void consultarMenuClinica(int escolha){
         printf("Editar Clinica");
         break;   
     case 4:
-        printf("Eliminar Clinica \n");
-        eliminarClinica(clinicas);
+        if (idBaseC == 0)
+        {
+            printf("Nao existem clinicas!\n");
+            menuClinica();
+        }
+        else{
+            printf("Eliminar Clinica \n");
+            eliminarClinica(clinicas);
+        }
         break;   
     
     default:
