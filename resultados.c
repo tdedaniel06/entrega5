@@ -4,7 +4,7 @@
 #include "resultados.h"
 #include "funcionario.h"
 
-int somaMM = 0, somaME = 0, somaMA = 0, somaFM = 0, somaFE = 0, somaFA = 0;
+int somaMM = 0, somaME = 0, somaMA = 0, somaFM = 0, somaFE = 0, somaFA = 0, idClinica;
 
 void menuDados(){
     int escolha;
