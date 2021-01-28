@@ -9,7 +9,7 @@ main.o: main.c menu.h
 menu.o: menu.c consulta.h clinica.h funcionario.h
     gcc -g -o menu.o menu.c -c 
 
-funcionario.o: funcionario.c 
+funcionario.o: funcionario.c  
     gcc -g -o funcionario.o funcionario.c -c 
 
 clinica.o: clinica.c 

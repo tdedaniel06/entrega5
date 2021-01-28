@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "menu.h"
+#include "clinica.c"
 #include "funcionario.c"
 #include "consulta.c"
-#include "clinica.c"
 #include "resultados.c"
 
 //listar menu

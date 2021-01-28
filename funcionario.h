@@ -1,11 +1,6 @@
 #ifndef FUNCIONARIO_H_
 #define FUNCIONARIO_H_
 
-//struct bool
-typedef enum{
-    false,
-    true
-}boolean;
 
 /* structures */
 typedef struct
@@ -16,6 +11,7 @@ typedef struct
     int idade;
     float vencimento;
     char tipo;
+    char clinica;
     boolean active;
 }Funcionario;
 

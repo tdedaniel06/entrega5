@@ -40,7 +40,7 @@ void consultarMenuConsulta(int escolha){
         listarConsultas(consultas);
         break; 
     case 3:
-        printf("Editar func");
+        printf("Editar funcionarios");
         break;   
     case 4:
         printf("Eliminar funcionario \n");

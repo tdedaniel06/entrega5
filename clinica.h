@@ -1,6 +1,12 @@
 #ifndef CLINICA_H_
 #define CLINICA_H_
 
+//struct bool
+typedef enum{
+    false,
+    true
+}boolean;
+
 /*Structures*/
 typedef struct 
 {

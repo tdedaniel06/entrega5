@@ -5,4 +5,10 @@ void menuDados();
 
 void consultarMenuResuntados(int escolha);
 
+void idadeFuncionarios();
+
+int somaVencimentos();
+
+void listarMedicosVencimento();
+
 #endif
