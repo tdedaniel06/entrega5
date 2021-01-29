@@ -4,7 +4,7 @@
 #include "resultados.h"
 #include "funcionario.h"
 
-int somaMM = 0, somaME = 0, somaMA = 0, somaFM = 0, somaFE = 0, somaFA = 0, idClinica;
+int somaMM = 0, somaME = 0, somaMA = 0, somaFM = 0, somaFE = 0, somaFA = 0, idClinica, idFunc;
 
 void menuDados(){
     int escolha;
@@ -30,13 +30,12 @@ void consultarMenuResuntados(int escolha){
         listarMenu();
         break;
     case 1:
-        printf("Quantidade e Média de Idades, por Clinica, dos Funcionarios:");
+        printf("Quantidade e Media de Idades, por Clinica, dos Funcionarios: \n");
         idadeFuncionarios();
-        menuDados();
         break;
     case 2:
         printf("Soma dos Vencimentos, por Genero: \n");
-        somaVencimentos();
+        listarMedicosVencimento();
         break; 
     case 3:
         printf("Marcacoes dos funcionarios de uma clinica: \n");
@@ -45,8 +44,10 @@ void consultarMenuResuntados(int escolha){
         marcacoesPorEnfermeiro(idClinica);
         break;   
     case 4:
-        printf("Eliminar funcionario \n");
-        //eliminarFuncionario(funcionarios);
+        printf("Listar agenda do medico/enfermeiro: \n");
+        printf("Qual o medico a pesquisar: ");
+        scanf("%d", &idFunc);
+        listarAgendaFuncionario(idFunc);
         break;   
     
     default:
@@ -83,11 +84,13 @@ void idadeFuncionarios(){
             }
         }
         //Apresentar Resultados
-        printf("Clinica: %d - %s", clinicas[i].id, clinicas[i].nome);
-        printf("     Medicos:  %d   -  media: %d", contMedicos, (somaMedicos/contMedicos));
-        printf("     Enfermeiros:  %d   -  media: %d", contEnf, (somaEnf/contEnf));
-        printf("     Auxiliares:  %d   -  media: %d", contAux, (somaAux/contAux)); 
+        printf("Clinica: %d - %s\n", clinicas[i].id, clinicas[i].nome);
+        printf("     Medicos:  %d   -  media: %d\n", contMedicos, (somaMedicos/contMedicos));
+        printf("     Enfermeiros:  %d   -  media: %d\n", contEnf, (somaEnf/contEnf));
+        printf("     Auxiliares:  %d   -  media: %d\n", contAux, (somaAux/contAux)); 
     }
+
+    somaVencimentos();
 }
 
 int somaVencimentos(){
@@ -141,13 +144,15 @@ int somaVencimentos(){
         }
     }
     printf("Masculino:\n");
-    printf("Vencimentos de Medicos: %d", somaMM);
-    printf("Vencimentos de Enfermeiros: %d", somaME);
-    printf("Vencimentos de Auxiliares: %d", somaMA);
+    printf("Vencimentos de Medicos: %d\n", somaMM);
+    printf("Vencimentos de Enfermeiros: %d\n", somaME);
+    printf("Vencimentos de Auxiliares: %d\n", somaMA);
     printf("Feminino:\n");
-    printf("Vencimentos de Medicas: %d", somaFM);
-    printf("Vencimentos de Enfermeiras: %d", somaFE);
-    printf("Vencimentos de Auxiliares Femininas: %d", somaFA);
+    printf("Vencimentos de Medicas: %d\n", somaFM);
+    printf("Vencimentos de Enfermeiras: %d\n", somaFE);
+    printf("Vencimentos de Auxiliares Femininas: %d\n", somaFA);
+
+    menuDados();
 }
 
 void listarMedicosVencimento(){
@@ -167,6 +172,7 @@ void listarMedicosVencimento(){
         }
     }
     printf("Total de Vencimentos de Medicos: %d", somaVencMedicos);
+    menuDados();
 }
 
 //marcacoes por enfermeiro de uma clinica
@@ -191,4 +197,18 @@ void marcacoesPorEnfermeiro(int idClinica){
             }
         }
     }    
+    menuDados();
+}
+
+//listar agenda do medico/enfermeiro
+void listarAgendaFuncionario(int id){
+
+    for (int i = 0; i < idBaseU; i++)
+    {
+        if (consultas[i].idFuncionario == id)
+        {
+            printf(" Utente: %s \n", consultas[i].nome);
+        }
+    }
+    menuDados();
 }

@@ -93,13 +93,6 @@ void criarFuncionario(Funcionario *funcionarios){
 
     printf("Genero (M/F): ");
     scanf("%c", &funcionario.genero);
-    
-    //verifica genero d funcionario inserido
-    while(funcionario.genero != 'M' || funcionario.genero != 'F'){
-        printf("Formato incorreto!");
-        printf("Genero (M/F): ");
-        scanf("%c", &funcionario.genero);
-    }
 
     printf("Idade: ");
     scanf("%d", &funcionario.idade);
@@ -111,13 +104,6 @@ void criarFuncionario(Funcionario *funcionarios){
 
     printf("Cargo (M - medico / E - enfermeiro / A - auxiliar): ");
     scanf("%c", &funcionario.tipo);
-    
-    //verifica tipo de funcionario inserido
-    while(funcionario.tipo != 'M' || funcionario.tipo != 'E' || funcionario.tipo != 'A'){
-        printf("Formato incorreto!");
-        printf("Cargo (M - medico / E - enfermeiro / A - auxiliar): ");
-        scanf("%c", &funcionario.tipo);
-    }
 
     printf("Clinica: ");
     scanf("%d", &funcionario.clinica);

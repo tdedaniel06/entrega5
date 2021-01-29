@@ -13,4 +13,6 @@ void listarMedicosVencimento();
 
 void marcacoesPorEnfermeiro(int idClinica);
 
+void listarAgendaFuncionario(int id);
+
 #endif
